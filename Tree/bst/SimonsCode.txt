@@ -1,0 +1,53 @@
+//Erase
+
+if (r == nullptr) 
+      return 0;
+    
+    size_t retval = 1;
+
+    if (v < r -> data)
+      retval = erase (v, r -> left);
+
+    else if (v > r -> data)
+      retval = erase (v, r -> right);
+
+    else if (r -> left != nullptr && r -> right != nullptr){
+      Node* ios = minimum(r -> right);
+      r -> data = ios -> data;
+      retval = erase (r -> data, r -> right);
+    }
+
+    else{
+      Node* t = (r -> left != nullptr) ? r -> left : r -> right;
+
+      if ((r -> parent) -> right == r)
+         (r -> parent) -> right = t;
+
+      else
+        (r -> parent) -> left = t;
+
+      t -> parent = r -> parent;
+
+      Node* tmp = r;
+      r = t;
+
+      delete tmp;
+      --m_size;
+    }
+
+    return retval;
+
+//Find Helper
+
+    Node* vSearch = m_header.parent;
+
+    while (vSearch -> data != v){
+
+      if (vSearch -> data > v)
+        vSearch = vSearch -> left;
+
+      else if (vSearch -> data < v)
+        vSearch = vSearch -> right;
+    }
+
+    return vSearch;
