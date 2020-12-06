@@ -1,0 +1,16 @@
+fun evaluate (tree : lexNode.exprNode<String>): Float{
+    if (tree.getLhs() != tree) {
+        var treeLeft = tree.getLhs()
+        var treeRight = tree.getRhs()
+        when (tree.value){
+            "PLUS" -> return evaluate(treeLeft)+evaluate(treeRight)
+            "MINUS" -> return evaluate(treeLeft)-evaluate(treeRight)
+            "TIMES" -> return evaluate(treeLeft)*evaluate(treeRight)
+            "DIVIDES" -> return evaluate(treeLeft)/evaluate(treeRight)
+            "POWER" -> return evaluate(treeLeft).kotlin.math.pow(evaluate(treeRight))
+        }
+    }
+    else {
+        return tree.value.toFloat()
+    }
+}
